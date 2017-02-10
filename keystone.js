@@ -10,54 +10,14 @@ var express = require('express'),
  
     keystone.set('app', app);
     keystone.set('mongoose', mongoose);
-    path = require('path'); // file and dir path handling
-
-
-
-app.set('views', path.join(__dirname, '/public/views'));
-app.set('view engine', 'jade');
-app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
-
-/**
- * Primary app routes.
- */
-
-
-
-app.use( express.static(__dirname+"/tpl") ); //tpl
-
-// Normal routes
-app.get('/media-overview/*', function(req, res){
-  res.render('home.jade');
-});
-app.get("/tpl/homepage", function(req, res, next){
-  res.render("homepage.jade");
-});
-
-
-app.get("/tpl/module-1/app", function(req, res, next){
-  res.render("app.jade");
-});
-
-// app.get("/tpl/module-1/blocks/header", function(req, res, next){
-//   res.render("header.jade");
-// });
-
-// app.get("/tpl/module-1/blocks/nav", function(req, res, next){
-//   res.render("nav.jade");
-// });
-
-app.get("/tpl/module-1/section-1/media-is/media-is", function(req, res, next){
-  res.render("media-is.jade");
-});
 
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
 // and documentation.
 
 keystone.init({
-	'name': 'ratings-academy-dev',
-	'brand': 'ratings-academy-dev',
+	'name': 'portfolio-cms',
+	'brand': 'portfolio-cms',
 
 	'sass': 'public',
 	'static': 'public',
@@ -69,7 +29,6 @@ keystone.init({
 	'session': true,
 	'auth': true,
 	'user model': 'User',
-	'port': 5055
 });
 
 // Load your project's Models
@@ -91,7 +50,8 @@ keystone.set('routes', require('./routes'));
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
 	posts: ['posts', 'post-categories'],
-	galleries: 'galleries'
+	galleries: 'galleries',
+	users: 'users',
 });
 
 // Start Keystone to connect to your database and initialise the web server
