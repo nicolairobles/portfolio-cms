@@ -1,0 +1,75 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var tv_panels_link = $(".tv_panels_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).tv_panels_link=="true" ) {
+      tv_panels_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      tv_panels_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var mobile_panels_link = $(".mobile_panels_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).mobile_panels_link=="true" ) {
+      mobile_panels_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      mobile_panels_link.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <!-- <h3 class="text-info m-t-xl font-thin m-b-none">What form does media take?</h3> -->
+
+      <!-- custom url modal -->
+      <br><br>
+      
+      <!-- <a ui-sref="media-overview.audio-panels.tldr" class="btn btn-success" ng-click="app.click_history.audio_panels_modal_link = 'true';" class="audio_panels_link">TLDR</a> -->
+
+
+      <!-- <div id="node-req" class="wrapper"></div>
+      <div class="line b-b"></div> -->
+      <p>
+        We can consume content and advertising in three different forms: video, text and audio.
+      </p>
+      <p>*Table for Audio, Video, Text with definitions</p>
+
+      <p>Consumers can be exposed to advertisements in two different ways: linearly and dynamically.</p>
+      <p>*Table for Linear, Advertising, Dynamic Advertising with definitions</p>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.tv-panels" class="leftArrow" ng-click="app.click_history.tv_panels_link = 'true';" class="tv_panels_link" id="tv_panels_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.mobile-panels" class="rightArrow" ng-click="app.click_history.mobile_panels_link = 'true';" class="mobile_panels_link" id="mobile_panels_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>

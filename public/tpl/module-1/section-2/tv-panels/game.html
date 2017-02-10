@@ -1,0 +1,99 @@
+<!-- Overall wrapper for game box -->
+<div class="panel panel-default gameA_box game-box game-on" ng-show="!quizOver">
+
+	<!-- Title of Game - always shown -->
+	<div class="panel-heading game-title">Overview</div>
+
+	<!-- Stars Section - show when in progress -->
+	<div id="game-stars-wrap">
+		<ul id="game-stars" ng-controller="RatingDemoCtrl">
+		<!-- <rating ng-model="rate" max="{{questionCount}}" readonly="isReadonly"></rating> -->
+			<li id="game-star" ng-repeat="question in questions">
+				<a><i class="glyphicon glyphicon-star-empty"></i></a>
+			</li>
+		</ul>
+	</div>
+
+	<!-- Area shown when game is in Progress -->
+	<div class="quiz-area" ng-show="inProgress">
+
+		<!-- Area shown when game is in Progress and NOT over -->
+		<div>
+
+			<!-- Only shown when answering a question -->
+			<h2 id="question" ng-hide="explanationMode">{{question}}</h2>
+
+
+			<!-- Only shown upon submitting an answer -->
+			<div id="answer" ng-show="!answerMode">
+				<h2 id="correct-answer" ng-show="correctAns">That's right! <br>{{explanation}}
+				</h2>
+
+<!-- 				<h2 id="incorrect-answer" ng-show="!correctAns">Sorry, that is an incorrect answer.</h2> -->
+
+				<button ng-click="nextQuestion()" class="next-question" ng-show="correctAns">Next</button>
+			</div>
+
+		    <!-- Area always shown -->
+			<ul id="options" ng-hide="explanationMode">
+				<li ng-repeat="option in options">
+					<label>
+						<input type="button" name="answer" ng-click="checkAnswer(option.id)" value="{{option.value}}">
+						<!-- {{option}} -->
+					</label>
+				</li>
+			</ul>
+
+
+
+			<div id="incorrect-answer-wrapper"  ng-show="!correctAns">
+				<i class="fa fa-frown-o" aria-hidden="true"></i>
+				<h2 id="incorrect-answer">TRY AGAIN</h2>
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- Area shown when game in NOT in Progress -->
+<!-- 	<div class="intro" ng-show="!inProgress">
+		<button id="startQuiz" ng-click="start()">Start the Quiz</button>
+	</div> -->
+
+<!-- End overall game box wrapper -->
+</div>
+
+
+
+<!-- NOT IN PROGRESS GAME VIEW -->
+<!-- Overall wrapper for game box -->
+<div class="panel panel-default gameA_box game-box" id="quiz-over" ng-show=quizOver>
+
+	<!-- Area shown when game is in Progress -->
+	<div class="quiz-area quiz-over">
+
+		<!-- Area shown when game is in Progress and quiz is over -->
+		<div ng-show="quizOver">
+			<div class=stars-wrapper>
+				<li class="game-star-icons-li-left"><i class="glyphicon glyphicon-star"></i></li>    
+				<li class="game-star-icons-li-middle"><i class="glyphicon glyphicon-star"></i></li>    
+				<li class="game-star-icons-li-right"><i class="glyphicon glyphicon-star"></i></li>    
+			</div>
+
+			<div class="quiz-over">
+				<h2 class="congrats">Congratulations</h2>
+				<h2 class="congrats-subtitle">(you're almost a ratings pro)</h2>
+			</div>
+
+			<div class=game-reset-wrapper>
+				<li class="reset-icon-li"><a ng-click="start()"><i class="glyphicon glyphicon-repeat"></i></a></li>    
+				<button id="reset-game" ng-click="start()">Reset?</button>
+			</div>
+
+		</div>
+
+	</div>
+
+
+<!-- End overall game box wrapper -->
+</div>

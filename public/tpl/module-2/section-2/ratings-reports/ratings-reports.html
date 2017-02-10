@@ -1,0 +1,85 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var what_are_ratings_link = $(".what_are_ratings_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).what_are_ratings_link=="true" ) {
+      what_are_ratings_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      what_are_ratings_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var primary_playback_periods = $(".primary_playback_periods")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).primary_playback_periods=="true" ) {
+      primary_playback_periods.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      primary_playback_periods.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <a ui-sref="media-overview.ratings-reports.tldr" class="btn btn-success tldr" ng-click="app.click_history.ratings_reports_modal_link = 'true';" class="ratings_reports_link">TLDR</a>
+
+      
+      <h3 class="page-title red">Ratings Reports</h3>
+      <p>Rating reports are a pretty big deal for the media industry because they provide metrics that media buyers and sellers use to evaluate the content or ad they place their messaging in. Ratings answer several key questions:</p>
+
+      <!-- Container for 3 icons -->
+        <div class="row">
+          <div class="inline-block-wrapper table-wrapper">
+
+            <div class="inline-block-container col-sm-4">
+              <h5 class="content-sub-title red">How Many?</h5>
+              <p class="inline-block-text table-cell medium-size ">How many people were exposed to (saw, read, or heard) a piece of content or ad?</p>
+              <img class="inline-block-icon" src="img/ratings-who.svg">
+            </div>
+            <div class="inline-block-container col-sm-4">
+              <h5 class="content-sub-title red">How Often?</h5>
+              <p class="inline-block-text table-cell medium-size">How often was a specific audience exposed to a piece of content or ad?</p>
+              <img class="inline-block-icon" src="img/ratings-when.svg">
+
+            </div>
+            <div class="inline-block-container col-sm-4">
+              <h5 class="content-sub-title red">How Long?</h5>
+              <p class="inline-block-text table-cell medium-size">How long was this audience exposed to a piece of content or ad?</p>
+              <img class="inline-block-icon" src="img/ratings-how-long.svg">
+            </div>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.what-are-ratings" class="leftArrow" ng-click="app.click_history.what_are_ratings_link = 'true';" class="what_are_ratings_link" id="what_are_ratings_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.primary-playback-periods" class="rightArrow" ng-click="app.click_history.primary_playback_periods_link = 'true';" class="primary_playback_periods_link" id="primary_playback_periods_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>

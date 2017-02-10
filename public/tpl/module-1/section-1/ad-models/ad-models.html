@@ -1,0 +1,92 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var content_and_ads_link = $(".content_and_ads_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).content_and_ads_link=="true" ) {
+      content_and_ads_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      content_and_ads_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var linear_vs_dynamic_link = $(".linear_vs_dynamic_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).linear_vs_dynamic_link=="true" ) {
+      linear_vs_dynamic_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      linear_vs_dynamic_link.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+
+      <!-- custom url modal -->
+      <br><br>
+      
+<!--       <a ui-sref="media-overview.ad-models.tldr" class="btn btn-success" ng-click="app.click_history.ad_models_modal_link = 'true';" class="ad_models_link">TLDR</a> -->
+
+      <h3 class="page-title red">Ad Models</h3>
+
+      <p>There are two models for ads.</p>
+
+      <!-- Container for content -->
+        <div class="row">
+          <div class="inline-block-wrapper">
+
+            <div class="inline-block-container col-sm-6">
+              <h5 class="content-sub-title red">LINEAR ADVERTISING</h5>
+              <img class="inline-block-icon padding-right-seven" src="img/linear-ads.svg">
+              <p>A linear ad is one that is distributed to many people. Specifically, an ad (or series of ads) is/are delivered to an audience in a set order at a set time determined by the media owner. So the entire audience is exposed to the same ad or set of ads.</p>
+
+              <p>You’ll oftentimes see linear ads while watching your 8 PM show on TV. That shampoo commercial you just saw was also seen by your aunt watching the same show down the street.</p>
+            </div>
+            <div class="inline-block-container col-sm-6">
+              <h5 class="content-sub-title red">DYNAMIC ADVERTISING</h5>
+              <img class="inline-block-icon padding-right-seven" src="img/dynamic-ads.svg">
+              <p>A dynamic ad is specifically curated for a distinct audience based on information known about the audience. So many people are exposed to many different ads.</p>
+
+              <p>You’ll oftentimes see dynamic ads, or ones that are specifically for you, online. Have you ever been online shopping and then ads for that shirt you were looking at are now all over your usual sites? That is dynamic advertising!</p>
+
+            </div>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<br><br><br>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.content-and-ads" class="leftArrow" ng-click="app.click_history.content_and_ads_link = 'true';" class="content_and_ads_link" id="content_and_ads_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.linear-vs-dynamic" class="rightArrow" ng-click="app.click_history.linear_vs_dynamic_link = 'true';" class="linear_vs_dynamic_link" id="linear_vs_dynamic_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>

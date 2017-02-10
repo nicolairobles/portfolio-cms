@@ -1,0 +1,100 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var panels_link = $(".panels_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).panels_link=="true" ) {
+      panels_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      panels_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var tv_panels_methods_link = $(".tv_panels_methods_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).tv_panels_methods_link=="true" ) {
+      tv_panels_methods_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      tv_panels_methods_link.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <!-- <h3 class="text-info m-t-xl font-thin m-b-none">Overview</h3> -->
+
+      <!-- custom url modal -->
+      <br><br>
+      
+      <!-- <a ui-sref="media-overview.platforms.tldr" class="btn btn-success" ng-click="app.click_history.platforms_modal_link = 'true';" class="platforms_link">TLDR</a> -->  
+
+      <h3 class="page-title red">TV Panels - Overview</h3>
+
+      
+  <!-- tab -->
+      <div ng-controller="TVPanelsOverviewTabsCtrl" class="panel game-box" set-ng-animate="false">
+
+        <p class="">In the U.S., Nielsen’s TV panels provide ratings data for both national and local television.</p>
+        <p>As the name denotes, national television refers to TV programming that is broadcast and viewed across the U.S. Local television refers to TV programming that is broadcast and viewed in a select region in the U.S. To ensure local markets are effectively measured and represented in the sample, Nielsen created 210 geographic areas in the U.S., called Designated Market Areas™ (DMAs), in which local television viewing is measured. DMA data are essential for marketers, researchers and organizations who want their media to focus on a specific region, like where their business is located. The DMAs are ranked based on the number of TV households in that market area. For instance, the New York DMA is ranked No. 1 because it has the largest amount of TV households. It’s not a clear distinction between national and local panels anymore as some data from local homes also are included in the national ratings.</p>
+        <p>Nielsen uses four methods to measure national and local television.</p>
+
+        <br>
+
+        <tabset justified="true">
+          <tab ng-repeat="tab in tabs" active="tab.active">
+
+            <tab-heading>
+              <img src="img/{{tab.img}}" class="tab-heading-img">
+              <p class="tab-heading-text">{{tab.title}}</p>
+            </tab-heading>
+
+            <div class="content-text">
+              <div class="tab-content-text">
+                <p ng-repeat="paragraph in tab.content" class="text-justify" ng-class="paragraph.type">{{paragraph.value}}
+                </p>
+              </div>
+            </div>
+
+          </tab>
+        </tabset>
+
+        <br><br><br>
+
+        <p>People meters, set meters and code readers listen for specific codes, called watermarks, which are a unique sounds inaudible to the human ear. These codes are embedded into the audio of all measured programs and ads by TV stations as they air their programming. When a program or ad plays on the screen, Nielsen’s meters will note the specific watermark and which households viewed the content. This code tells Nielsen what is being viewed as well as when it’s viewed. This informs what playback period this tuning should be included in. At the same time, the meters and readers also record a portion of the audio from the program being watched, creating a “signature” that can be used as backup to identify the program airing in case there is an issue with the watermark. If needed, Nielsen will compare this portion of audio to a library of programs collected from TV networks to identify the program.</p>
+
+      </div>
+      <!-- / tab -->
+
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.panels" class="leftArrow" ng-click="app.click_history.panels_link = 'true';" class="panels_link" id="panels_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.tv-panels-methods" class="rightArrow" ng-click="app.click_history.tv_panels_methods_link = 'true';" class="tv_panels_methods_link" id="tv_panels_methods_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>

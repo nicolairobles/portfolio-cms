@@ -1,0 +1,56 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var census_data_link = $(".census_data_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).census_data_link=="true" ) {
+      census_data_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      census_data_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+});
+
+
+
+</script>
+
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <!-- <h3 class="text-info m-t-xl font-thin m-b-none">Overview</h3> -->
+
+      <!-- custom url modal -->
+      <a ui-sref="media-overview.privacy.tldr" class="btn btn-success" ng-click="app.click_history.privacy_modal_link = 'true';" class="privacy_link">TLDR</a>
+
+      
+
+
+      <!-- <div id="node-req" class="wrapper"></div>
+      <div class="line b-b"></div> -->
+      <p>
+      *Table/Quiz for Linear Ads + Dynamic Ads
+
+
+      </p>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.census-data" class="leftArrow" ng-click="app.click_history.census_data_link = 'true';" class="census_data_link" id="census_data_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+        </ul>
+    </div>

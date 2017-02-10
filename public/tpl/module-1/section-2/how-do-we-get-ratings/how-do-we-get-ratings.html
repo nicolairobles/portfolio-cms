@@ -1,0 +1,78 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var ratings_game_link = $(".ratings_game_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).ratings_game_link=="true" ) {
+      ratings_game_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      ratings_game_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var panels_link = $(".panels_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).panels_link=="true" ) {
+      panels_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      panels_link.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <!-- <h3 class="text-info m-t-xl font-thin m-b-none">Overview</h3> -->
+
+      <!-- custom url modal -->
+      <br><br>
+      
+      <!-- <a ui-sref="media-overview.how-do-we-get-ratings.tldr" class="btn btn-success" ng-click="app.click_history.how_do_we_get_ratings_modal_link = 'true';" class="how_do_we_get_ratings_link">TLDR</a> -->
+
+      <h3 class="page-title red">How do We Get Ratings?</h3>
+      
+
+
+      <!-- <div id="node-req" class="wrapper"></div>
+      <div class="line b-b"></div> -->
+      <p>
+      Now that we know what ratings are, it's time to go over how Nielsen measures what content people are consuming to calculate those ratings.
+      </p>
+
+      <p>Nielsen uses multiple data sources that include representative, people-based panels and tag-based census data to deliver a holistic view of the media industry and its audiences.</p>
+      <p>First, Nielsen recruits people across the U.S. to join panels, creating representative samples of audiences, like you, and measures their media consumption habits. Second, we combine media consumption data from these panels with census data from digital devices. Census measurement means we count every time an ad or piece of content is viewed if our technology is placed on the media.</p>
+      <p>Nielsen’s measurement strategy leverages granular big data sets and robust panel data to measure all media consumption and provide stable and representative results.</p>
+      <p>Now let's take a closer look at panels.</p>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.ratings-game" class="leftArrow" ng-click="app.click_history.ratings_game_link = 'true';" class="ratings_game_link" id="ratings_game_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.panels" class="rightArrow" ng-click="app.click_history.panels_link = 'true';" class="panels_link" id="panels_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>

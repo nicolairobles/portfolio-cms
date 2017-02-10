@@ -1,0 +1,117 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var ad_models_link = $(".ad_models_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).ad_models_link=="true" ) {
+      ad_models_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      ad_models_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var platforms_link = $(".ratings_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).platforms_link=="true" ) {
+      platforms_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      platforms_link.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <!-- <h3 class="text-info m-t-xl font-thin m-b-none">What Type of Media Do You Interact With?</h3> -->
+
+      <!-- custom url modal -->
+      <a ui-sref="media-overview.linear-vs-dynamic.tldr" class="btn btn-success" ng-click="app.click_history.linear_vs_dynamic_modal_link = 'true';" class="linear_vs_dynamic_link">TLDR</a>
+
+
+
+      <!-- <div id="node-req" class="wrapper"></div>
+      <div class="line b-b"></div> -->
+      <p>
+        The media landscape is rife with terminology and phrases unique to itself. To help you navigate all of them, we’ve aggregated them here with how we define each of them.
+      </p>
+      <p>*Table for Content and Advertising with definitions</p>
+      
+<!--     </div>
+  </div>
+</div> -->
+
+  
+      <!-- page content -->
+      <p>
+        Let's see what you've learned before we move on
+      </p>
+
+      <!-- game functionality -->
+      <div class="wrapper-md" ng-controller="gameBTourCtrl">
+        <div class="row">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-10">
+
+              <!-- Game Box -->
+              <div ng-controller="ProgressDemoCtrl" class="panel panel-default gameB_box" style="
+    padding: 5% 20% 15% 20%;
+    border: 2px solid #d60037;
+    color: #d60037;
+    text-align: center;">
+
+                <div class="panel-heading" style="
+    font-family: brandon-black;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    background: #ffffff;
+    border: none;
+    color: #d60037;
+    padding: 11% 0% 9% 0%;">
+                  Overview - Game to Come
+                </div>
+
+
+
+              </div>
+              <!-- / Game box -->
+          </div>
+          <div class="col-sm-1"></div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div> 
+
+
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.ad-models" class="leftArrow" ng-click="app.click_history.ad_models_link = 'true';" class="ad_models_link" id="ad_models_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.platforms" class="rightArrow" ng-click="app.click_history.platforms_link = 'true';" class="platforms_link" id="platforms_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>

@@ -1,0 +1,73 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var platforms_link = $(".platforms_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).platforms_link=="true" ) {
+      platforms_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      platforms_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var key_players_link = $(".key_players_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).key_players_link=="true" ) {
+      key_players_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      key_players_link.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <!-- <h3 class="text-info m-t-xl font-thin m-b-none">What form does media take?</h3> -->
+
+      <!-- custom url modal -->
+      <a ui-sref="media-overview.game-3.tldr" class="btn btn-success" ng-click="app.click_history.game_3_modal_link = 'true';" class="game_3_link">TLDR</a>
+
+
+      <!-- <div id="node-req" class="wrapper"></div>
+      <div class="line b-b"></div> -->
+      <p>
+        We can consume content and advertising in three different forms: video, text and audio.
+      </p>
+      <p>*Table for Audio, Video, Text with definitions</p>
+
+      <p>Consumers can be exposed to advertisements in two different ways: linearly and dynamically.</p>
+      <p>*Table for Linear, Advertising, Dynamic Advertising with definitions</p>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.platforms" class="leftArrow" ng-click="app.click_history.platforms_link = 'true';" class="platforms_link" id="platforms_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.key-players" class="rightArrow" ng-click="app.click_history.key_players_link = 'true';" class="key_players_link" id="key_players_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>

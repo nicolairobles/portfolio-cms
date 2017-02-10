@@ -1,0 +1,85 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var audio_panels_panels_link = $(".audio_panels_panels_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).audio_panels_panels_link=="true" ) {
+      audio_panels_panels_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      audio_panels_panels_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var census_data_link = $(".census_data_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).census_data_link=="true" ) {
+      census_data_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      census_data_link.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <!-- <h3 class="text-info m-t-xl font-thin m-b-none">Overview</h3> -->
+
+      <!-- custom url modal -->
+      <br><br>
+      
+      <!-- <a ui-sref="media-overview.game-5.tldr" class="btn btn-success" ng-click="app.click_history.game_5_modal_link = 'true';" class="game_5_link">TLDR</a> -->
+      <h3 class="page-title red">Panels Game</h3>
+
+      <!-- page content -->
+      <p>
+        Let's see what you've learned before we move on
+      </p>
+
+      <!-- game functionality -->
+      <div class="wrapper-md game-area" ng-controller="gameETourCtrl">
+        <div class="row">
+          <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+
+              <!-- Game Box -->
+
+                      <quize/>
+
+              <!-- / Game box -->
+            </div>
+          <div class="col-sm-1"></div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.audio-panels-panels" class="leftArrow" ng-click="app.click_history.audio_panels_panels_link = 'true';" class="audio_panels_panels_link" id="audio_panels_panels_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.census-data" class="rightArrow" ng-click="app.click_history.census_data_link = 'true';" class="census_data_link" id="census_data_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>

@@ -1,0 +1,101 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var digital_panels_methods_link = $(".digital_panels_methods_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).digital_panels_methods_link=="true" ) {
+      digital_panels_methods_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      digital_panels_methods_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var audio_panels_overview_link = $(".audio_panels_overview_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).audio_panels_overview_link=="true" ) {
+      audio_panels_overview_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      audio_panels_overview_link.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <!-- <h3 class="text-info m-t-xl font-thin m-b-none">Overview</h3> -->
+
+      <!-- custom url modal -->
+      <br><br>
+      
+      <!-- <a ui-sref="media-overview.platforms.tldr" class="btn btn-success" ng-click="app.click_history.platforms_modal_link = 'true';" class="platforms_link">TLDR</a> -->  
+
+      <h3 class="page-title red">Digital Panels - Panels</h3>
+
+      
+  <!-- tab -->
+      <div ng-controller="DigitalPanelsPanelsTabsCtrl" class="panel game-box" set-ng-animate="false">
+
+        <p class="">Using this technology and techniques, Nielsen maintains three digital panels to measure online, mobile and cross-platform habits.</p>
+
+        <br>
+
+        <tabset justified="true">
+          <tab ng-repeat="tab in tabs" active="tab.active">
+
+            <tab-heading>
+              <img src="img/{{tab.img}}" class="tab-heading-img">
+              <p class="tab-heading-text">{{tab.title}}</p>
+            </tab-heading>
+
+            <div class="content-text">
+              <div class="tab-content-text">
+                <p ng-repeat="paragraph in tab.content" class="text-justify" ng-class="paragraph.type">{{paragraph.value}}</p>
+              </div>
+                <!-- <img class="slide-image" src="http://placehold.it/350x150/d60037/ffffff"> -->
+                <!-- <img class="slide-image" src="img/{{slide.img}}"> -->
+            </div>
+
+          </tab>
+        </tabset>
+
+        <br><br><br>
+
+        <p>While all of us consumers are glued to our smartphones getting text neck syndrome (oh it’s real), the amount of big data being shared is incredible. Nielsen uses panels to sample a representative group of real consumers to understand how audiences are interacting with digital media.
+        </p>
+        <p>Now let's review the final panel: Audio.</p>
+
+      </div>
+      <!-- / tab -->
+
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.digital-panels-methods" class="leftArrow" ng-click="app.click_history.digital_panels_methods_link = 'true';" class="digital_panels_methods_link" id="digital_panels_methods_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.audio-panels-overview" class="rightArrow" ng-click="app.click_history.audio_panels_overview_link = 'true';" class="audio_panels_overview_link" id="audio_panels_overview_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>

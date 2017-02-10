@@ -1,0 +1,86 @@
+
+<script>
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var is_this_media_link = $(".is_this_media_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).is_this_media_link=="true" ) {
+      is_this_media_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      is_this_media_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var ad_models_link = $(".ad_models_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).ad_models_link=="true" ) {
+      ad_models_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      ad_models_link.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+
+
+      <!-- custom url modal -->
+      <br><br>
+      
+<!--       <a ui-sref="media-overview.content-and-ads.tldr" class="btn btn-success" ng-click="app.click_history.content_and_ads_modal_link = 'true';" class="content_and_ads_link">TLDR</a> -->
+
+      <h3 class="page-title red">Content And Ads</h3>
+
+      <p>Great! Now let's break down media another way. There are two forms of media that consumers are exposed to:</p>
+
+      <!-- Container for content -->
+        <div class="row">
+          <div class="inline-block-wrapper">
+
+            <div class="padding-right-five col-sm-6">
+              <h5 class="content-sub-title red">CONTENT</h5>
+              <p>Content refers to the medium an audience is consuming (e.g., viewing, reading, listening), whether that be a TV show, an article, music on your phone, or a station on the radio.</p>
+            </div>
+            <div class="col-sm-6">
+              <h5 class="content-sub-title red">ADVERTISING</h5>
+              <p>Advertising refers to paid messaging. Examples include television commercials, online banner ads, branded content, advertorials, native content, direct mail and billboards. Advertising can be either linear or dynamic (see separate definitions to follow).</p>
+            </div>
+
+          </div>
+        </div>
+
+        <p>Before we move on, let's take a closer look at advertising.</p>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.is-this-media" class="leftArrow" ng-click="app.click_history.is_this_media_link = 'true';" class="is_this_media_link" id="is_this_media_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.ad-models" class="rightArrow" ng-click="app.click_history.ad_models_link = 'true';" class="ad_models_link" id="ad_models_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>
+  </div>
+</div>

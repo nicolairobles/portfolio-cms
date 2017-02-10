@@ -1,0 +1,91 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var media_is_link = $(".media_is_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).media_is_link=="true" ) {
+      media_is_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      media_is_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var is_this_media = $(".is_this_media")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).is_this_media=="true" ) {
+      is_this_media.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      is_this_media.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <a ui-sref="media-overview.video-text-audio.tldr" class="btn btn-success tldr" ng-click="app.click_history.video_text_audio_modal_link = 'true';" class="video_text_audio_link">TLDR</a>
+
+      
+      <h3 class="page-title red">Video, Text, Audio</h3>
+
+
+
+      <p>
+        There are three ways media can be displayed:
+      </p>
+
+      <!-- Container for 3 icons -->
+        <div class="row">
+          <div class="inline-block-wrapper">
+            
+            <div class="col-sm-4 inline-block-container">
+              <h5 class="content-sub-title red">VIDEO</h5>
+              <img class="inline-block-icon" src="img/video-icon.svg">
+              <p>Moving pictures that are viewed online or via traditional television that can be created by anyone.</p>
+            </div>
+            <div class="col-sm-4 inline-block-container">
+              <h5 class="content-sub-title red">TEXT</h5>
+              <img class="inline-block-icon" src="img/text-icon.svg">
+              <p>Content or ads in the form of written words you read (e.g., online blogs, magazine articles, instant messages, web copy).</p>
+            </div>
+            <div class="col-sm-4 inline-block-container">
+              <h5 class="content-sub-title red">AUDIO</h5>
+              <img class="inline-block-icon" src="img/audio-icon.svg">
+              <p>Content or ads in the form of sound you listen to (e.g., podcasts, digital radio, AM/FM radio, audio books).</p>
+            </div>
+
+          </div>
+        </div>
+
+        
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.media-is" class="leftArrow" ng-click="app.click_history.media_is_link = 'true';" class="media_is_link" id="media_is_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.is-this-media" class="rightArrow" ng-click="app.click_history.is_this_media_link = 'true';" class="is_this_media_link" id="is_this_media_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>

@@ -1,0 +1,99 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var tv_panels_panels_link = $(".tv_panels_panels_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).tv_panels_panels_link=="true" ) {
+      tv_panels_panels_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      tv_panels_panels_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var digital_panels_methods_link = $(".digital_panels_methods_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).digital_panels_methods_link=="true" ) {
+      digital_panels_methods_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      digital_panels_methods_link.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <!-- <h3 class="text-info m-t-xl font-thin m-b-none">Overview</h3> -->
+
+      <!-- custom url modal -->
+      <br><br>
+      
+      <!-- <a ui-sref="media-overview.platforms.tldr" class="btn btn-success" ng-click="app.click_history.platforms_modal_link = 'true';" class="platforms_link">TLDR</a> -->  
+
+      <h3 class="page-title red">Digital Panels - Overview</h3>
+
+      
+  <!-- tab -->
+      <div ng-controller="DigitalPanelsOverviewTabsCtrl" class="panel game-box" set-ng-animate="false">
+
+        <p class="">From using social media to battling for Pokémon, the ways people engage with media is changing every day. Today, digital technology allows consumers to consume and engage with content just about anywhere. And this untethered access to information has amplified the need for currency-quality audience measurement. That’s where Nielsen’s digital panels come in.</p>
+        <p>Nielsen uses two methods to measure digital audiences via panel.</p>
+        <br>
+
+        <tabset justified="true">
+          <tab ng-repeat="tab in tabs" active="tab.active">
+
+            <tab-heading>
+              <img src="img/{{tab.img}}" class="tab-heading-img">
+              <p class="tab-heading-text">{{tab.title}}</p>
+            </tab-heading>
+
+            <div class="content-text">
+              <div class="tab-content-text">
+                <p ng-repeat="paragraph in tab.content" class="text-justify">{{paragraph}}</p>
+              </div>
+                <!-- <img class="slide-image" src="http://placehold.it/350x150/d60037/ffffff"> -->
+                <!-- <img class="slide-image" src="img/{{slide.img}}"> -->
+            </div>
+
+          </tab>
+        </tabset>
+
+        <br><br><br>
+
+        <p>These meters measure all activity, including what sites and apps the panelists are viewing and for how long.</p>
+
+      </div>
+      <!-- / tab -->
+
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.tv-panels-panels" class="leftArrow" ng-click="app.click_history.tv_panels_panels_link = 'true';" class="tv_panels_panels_link" id="tv_panels_panels_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.digital-panels-methods" class="rightArrow" ng-click="app.click_history.digital_panels_methods_link = 'true';" class="digital_panels_methods_link" id="digital_panels_methods_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>

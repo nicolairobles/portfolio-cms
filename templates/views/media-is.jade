@@ -1,0 +1,44 @@
+script(type='text/javascript').
+  $( document ).ready(function() {
+  // PAGE AFTER
+  // jQuery for left-hand nav link
+  var video_text_audio_link = $(".video_text_audio_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).video_text_audio_link=="true" ) {
+  video_text_audio_link.addClass("link-clicked");
+  }
+  // On clicking arrow, the left-hand nav gets a new class
+  $("video-text-audio.rightArrow").on("click", function(){
+  video_text_audio_link.addClass("link-clicked");
+  });
+  });
+.hbox.hbox-auto-xs.hbox-auto-sm(ng-controller='tldrTourCtrl')
+  .col
+    .clearfix.padder-md
+      // custom url modal
+      br
+      br
+      // <a ui-sref="media-overview.media-is.tldr" class="btn btn-success tldr" ng-click="app.click_history.media_is_modal_link = 'true';" class="media_is_link" id="tldr-media-is">TLDR</a>
+      h3.page-title.red Media is...PUG
+      // <div class="line b-b"></div>
+      p#e1
+        | We all know what the word “media” means, but times have changed and its definition is evolving. The word “media” expands well beyond the realm of advertising and communications, as technology has made media an integral part of consumers’ lives—from traditional TV to on-the-go mobile consumption to radio to the internet to over-the-top (OTT) video programming. With the advent of mobile technology, consumers have more touchpoints than ever. And the rapidly expanding mobile environment offers marketers even more consumer insights. The challenge, however, lies in sifting through the treasure chest of big data to find actionable insights that will drive business results.
+      p
+        | Before we get too far along, let's start by breaking down the ways media can be displayed.
+      br
+      img(src='img/media-is.svg')
+      br
+      br
+      br
+.arrowWrap
+  ul.arrows
+    //
+      Customize by changing
+      (1) ui-sref
+      (2) ng-click="app.click_history.<appropriate link>"
+      (3) class, and
+      (4) id
+    // Page After Arrow
+    li#e2
+      a#video_text_audio_arrow.rightArrow(ui-sref='media-overview.video-text-audio', ng-click="app.click_history.video_text_audio_link = 'true';")
+        i.fa.fa-play

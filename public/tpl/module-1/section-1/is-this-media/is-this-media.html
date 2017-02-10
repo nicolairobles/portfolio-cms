@@ -1,0 +1,96 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var video_text_audio_link = $(".video_text_audio_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).video_text_audio_link=="true" ) {
+      video_text_audio_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.btn-success#video_text_audio_arrow").on("click", function(){
+      console.log("test if arrow clicked");
+      video_text_audio_link.addClass("link-clicked");
+      console.log("class added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var content_and_ads_link = $(".content_and_ads_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).content_and_ads_link=="true" ) {
+      content_and_ads_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.btn-success#type_of_media_arrow").on("click", function(){
+      content_and_ads_link.addClass("link-clicked");
+    });
+
+
+});
+
+
+
+</script>  
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+
+      <!-- custom url modal -->
+      <br><br>
+      
+<!--       <a ui-sref="media-overview.is-this-media.tldr" class="btn btn-success" ng-click="app.click_history.is_this_media_modal_link = 'true';" class="is_this_media_link">TLDR</a> -->
+      <h3 class="page-title red">Is This Media?</h3>
+
+      <!-- page content -->
+      <p>
+        Let's see what you've learned before we move on
+      </p>
+
+      <!-- game functionality -->
+      <div class="wrapper-md game-area" ng-controller="gameATourCtrl">
+        <div class="row">
+          <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+
+              <!-- Game Box -->
+
+                      <quiza/>
+
+              <!-- / Game box -->
+            </div>
+          <div class="col-sm-1"></div>
+        </div>
+      </div>
+      
+
+    </div>
+  </div>
+</div>  
+
+<div class="arrowWrap">
+  <ul class="arrows">
+          <!-- Customize by changing 
+  (1) ui-sref 
+  (2) ng-click="app.click_history.<appropriate link>" 
+  (3) class, and 
+  (4) id -->
+  
+  <!-- Page Before Arrow -->
+    <li><a ui-sref="media-overview.video-text-audio" class="leftArrow" ng-click="app.click_history.video_text_audio_link = 'true';" class="video_text_audio_link" id="video_text_audio_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+  <!-- Page After Arrow -->
+    <li><a ui-sref="media-overview.content-and-ads" class="rightArrow" ng-click="app.click_history.content_and_ads_link = 'true';" class="content_and_ads_link" id="content_and_ads_arrow"><i class="fa fa-play"></i></a></li>
+  </ul>
+</div>
+
+
+

@@ -1,0 +1,85 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var primary_playback_periods_link = $(".primary_playback_periods_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).primary_playback_periods_link=="true" ) {
+      primary_playback_periods_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      primary_playback_periods_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var how_do_we_get_ratings_link = $(".how_do_we_get_ratings_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).how_do_we_get_ratings_link=="true" ) {
+      how_do_we_get_ratings_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      how_do_we_get_ratings_link.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <!-- <h3 class="text-info m-t-xl font-thin m-b-none">Overview</h3> -->
+
+      <!-- custom url modal -->
+      <br><br>
+      
+      <!-- <a ui-sref="media-overview.game-4.tldr" class="btn btn-success" ng-click="app.click_history.game_4_modal_link = 'true';" class="game_4_link">TLDR</a> -->
+      <h3 class="page-title red">Ratings</h3>
+
+      <!-- page content -->
+      <p>
+        Let's see what you've learned before we move on
+      </p>
+
+      <!-- game functionality -->
+      <div class="wrapper-md game-area" ng-controller="gameDTourCtrl">
+        <div class="row">
+          <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+
+              <!-- Game Box -->
+
+                      <quizd/>
+
+              <!-- / Game box -->
+            </div>
+          <div class="col-sm-1"></div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.primary-playback-periods" class="leftArrow" ng-click="app.click_history.primary_playback_periods_link = 'true';" class="primary_playback_periods_link" id="primary_playback_periods_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.how-do-we-get-ratings" class="rightArrow" ng-click="app.click_history.how_do_we_get_ratings_link = 'true';" class="how_do_we_get_ratings_link" id="how_do_we_get_ratings_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>

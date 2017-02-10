@@ -1,0 +1,139 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var ratings_reports_link = $(".ratings_reports_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).ratings_reports_link=="true" ) {
+      ratings_reports_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      ratings_reports_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var game_4_link = $(".game_4_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).game_4_link=="true" ) {
+      game_4_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      game_4_link.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <!-- <h3 class="text-info m-t-xl font-thin m-b-none">Overview</h3> -->
+
+      <!-- custom url modal -->
+      <a ui-sref="media-overview.primary-playback-periods.tldr" class="btn btn-success" ng-click="app.click_history.primary_playback_periods_modal_link = 'true';" class="primary_playback_periods_link">TLDR</a>
+
+      <h3 class="page-title red">Primary Playback Periods</h3>
+      <p>Time frame is very important when we talk about ratings. Media buyers and sellers want to know when people are exposed to content and for how long. This is particularly relevant at a time when consumers can access content from a number of platforms at any time they choose. In the video and audio realm, we call this the playback period. Generally speaking, this refers to the window of time that an audience is engaged with content.</p>
+
+      <!-- Live -->
+        <div class="row">
+          <div class="inline-block-wrapper table-wrapper">
+
+            <div class="inline-block-container col-sm-6 table-cell padding-right-five">
+              <h5 class="content-sub-title red text-right intimate-headline">Live</h5>
+              <p class="text-right">You were exposed to the media when it was originally broadcast</p>
+            </div>
+            <div class="inline-block-container col-sm-6 table-cell ">
+              <img class="small-size inline-block-icon" src="img/live-viewing.svg">
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Live + Same Day -->
+        <div class="row">
+          <div class="inline-block-wrapper table-wrapper">
+
+            <div class="inline-block-container col-sm-6 table-cell padding-right-five">
+              <h5 class="content-sub-title red text-right intimate-headline">Live + Same Day</h5>
+              <p class="text-right">You were exposed to the media when it was originally broadcast or at some point that same day</p>
+            </div>
+            <div class="inline-block-container col-sm-6 table-cell ">
+              <img class="small-size inline-block-icon" src="img/live+same-day-viewing.svg">
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Live + 3 Days -->
+        <div class="row">
+          <div class="inline-block-wrapper table-wrapper">
+
+            <div class="inline-block-container col-sm-6 table-cell padding-right-five">
+              <h5 class="content-sub-title red text-right intimate-headline">Live + 3 Days</h5>
+              <p class="text-right">You were exposed to the media when it was originally broadcast or at some point within three days of that original broadcast</p>
+            </div>
+            <div class="inline-block-container col-sm-6 table-cell ">
+              <img class="small-size inline-block-icon" src="img/live+three-days-viewing.svg">
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Live + 7 Days -->
+        <div class="row">
+          <div class="inline-block-wrapper table-wrapper">
+
+            <div class="inline-block-container col-sm-6 table-cell padding-right-five">
+              <h5 class="content-sub-title red text-right intimate-headline">Live + 7 Days</h5>
+              <p class="text-right">You were exposed to the media when it was originally broadcast or at some point within seven days of that original broadcast</p>
+            </div>
+            <div class="inline-block-container col-sm-6 table-cell ">
+              <img class="small-size inline-block-icon" src="img/live+seven-days-viewing.svg">
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Live + X Days -->
+        <div class="row">
+          <div class="inline-block-wrapper table-wrapper">
+
+            <div class="inline-block-container col-sm-6 table-cell padding-right-five">
+              <h5 class="content-sub-title red text-right intimate-headline">Live + X Days</h5>
+              <p class="text-right">Because media is available to consumers for quite a bit longer than 7 days nowadays, buyers/sellers oftentimes look at a large timeframe to see what types of people interacted with their media throughout its lifespan</p>
+            </div>
+            <div class="inline-block-container col-sm-6 table-cell ">
+              <img class="small-size inline-block-icon" src="img/live+seven-x-days-viewing.svg">
+            </div>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.ratings-reports" class="leftArrow" ng-click="app.click_history.ratings_reports_link = 'true';" class="ratings_reports_link" id="ratings_reports_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.game-4" class="rightArrow" ng-click="app.click_history.game_4_link = 'true';" class="game_4_link" id="game_4_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>

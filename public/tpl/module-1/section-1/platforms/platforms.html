@@ -1,0 +1,95 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var linear_vs_dynamic_link = $(".linear_vs_dynamic_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).linear_vs_dynamic_link=="true" ) {
+      linear_vs_dynamic_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      linear_vs_dynamic_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var key_players_link = $(".key_players_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).key_players_link=="true" ) {
+      key_players_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      key_players_link.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <!-- <h3 class="text-info m-t-xl font-thin m-b-none">Overview</h3> -->
+
+      <!-- custom url modal -->
+      <br><br>
+      
+      <!-- <a ui-sref="media-overview.platforms.tldr" class="btn btn-success" ng-click="app.click_history.platforms_modal_link = 'true';" class="platforms_link">TLDR</a> -->  
+
+      <h3 class="page-title red">Platforms</h3>
+
+      
+  <!-- tab -->
+      <div ng-controller="PlatformsTabsCtrl" class="panel game-box" set-ng-animate="false">
+
+        <p class="slider-header-text">There are four primary content and advertising platforms:</p>
+
+        <br>
+
+        <tabset justified="true">
+          <tab ng-repeat="tab in tabs" active="tab.active">
+
+            <tab-heading>
+              <img src="img/{{tab.img}}" class="tab-heading-img">
+              <p class="tab-heading-text">{{tab.title}}</p>
+            </tab-heading>
+
+            <div class="content-text">
+              <div class="tab-content-text">
+                <p ng-repeat="paragraph in tab.content">{{paragraph}}</p>
+              </div>
+                <!-- <img class="slide-image" src="http://placehold.it/350x150/d60037/ffffff"> -->
+                <!-- <img class="slide-image" src="img/{{slide.img}}"> -->
+            </div>
+
+          </tab>
+        </tabset>
+
+      </div>
+      <!-- / tab -->
+
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.linear-vs-dynamic" class="leftArrow" ng-click="app.click_history.linear_vs_dynamic_link = 'true';" class="linear_vs_dynamic_link" id="linear_vs_dynamic_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.key-players" class="rightArrow" ng-click="app.click_history.key_players_link = 'true';" class="key_players_link" id="key_players_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>

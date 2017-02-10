@@ -1,0 +1,101 @@
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+  // PAGE BEFORE
+
+  // jQuery for left-hand nav link
+  var tv_panels_methods_link = $(".tv_panels_methods_link");
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).tv_panels_methods_link=="true" ) {
+      tv_panels_methods_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav link gets a new class
+  $("a.leftArrow").on("click", function(){
+      tv_panels_methods_link.addClass("link-clicked");
+      console.log("left arrow added")
+    });
+
+
+
+  // PAGE AFTER
+
+  // jQuery for left-hand nav link
+  var digital_panels_overview_link = $(".digital_panels_overview_link")
+  // Ask localStorage if link has been clicked before
+  if ( JSON.parse(localStorage.getItem('ngStorage-click_history')).digital_panels_overview_link=="true" ) {
+      digital_panels_overview_link.addClass("link-clicked");
+    }
+  // On clicking arrow, the left-hand nav gets a new class
+    $("a.rightArrow").on("click", function(){
+      digital_panels_overview_link.addClass("link-clicked");
+      console.log("right arrow added")
+    });
+});
+
+
+
+</script>
+
+
+<div ng-controller="tldrTourCtrl" class="hbox hbox-auto-xs hbox-auto-sm">
+  
+  <div class="col">
+    <div class="clearfix padder-md">
+      <!-- <h3 class="text-info m-t-xl font-thin m-b-none">Overview</h3> -->
+
+      <!-- custom url modal -->
+      <br><br>
+      
+      <!-- <a ui-sref="media-overview.platforms.tldr" class="btn btn-success" ng-click="app.click_history.platforms_modal_link = 'true';" class="platforms_link">TLDR</a> -->  
+
+      <h3 class="page-title red">TV Panels - Panels</h3>
+
+      
+  <!-- tab -->
+      <div ng-controller="TVPanelsPanelsTabsCtrl" class="panel game-box" set-ng-animate="false">
+
+        <p class="">To measure television viewing in the US, Nielsen maintains four panels</p>
+
+        <br>
+
+        <tabset justified="true">
+          <tab ng-repeat="tab in tabs" active="tab.active">
+
+            <tab-heading>
+              <div class="tab-heading-style">
+                <img src="img/{{tab.img}}" class="tab-heading-img">
+                <p class="tab-heading-text">{{tab.title}}</p>
+              </div>
+            </tab-heading>
+
+            <div class="content-text">
+              <div class="tab-content-text">
+                <p ng-repeat="paragraph in tab.content" class="text-justify" ng-class="paragraph.type">{{paragraph.value}}</p>
+              </div>
+            </div>
+
+          </tab>
+        </tabset>
+
+        <br><br><br>
+        <p>In addition to providing the core measurement for television, metered household panels act as truth sets, or calibration sources, for big data sets that often do not have any demographic information associated with them—we’ll talk about this point a bit more in the “Census-based measurement” section later on. Panelists are extensively trained to understand how to use the Nielsen meters and are thoroughly interviewed to gather demographic information on the household.</p>
+        <p>Nielsen uses a variety of panels and methods to measure TV viewing. The heart of this measurement is the use of real consumers who provide a representative view of media consumption habits today.
+        </p>
+        <p>Next, lets review digital panels.</p>
+
+      </div>
+      <!-- / tab -->
+
+    </div>
+  </div>
+</div>
+
+
+<div class="arrowWrap">
+        <ul class="arrows">
+          <li><a ui-sref="media-overview.tv-panels-methods" class="leftArrow" ng-click="app.click_history.tv_panels_methods_link = 'true';" class="tv_panels_methods_link" id="tv_panels_methods_arrow"><i class="fa fa-play fa-rotate-180"></i></a></li>
+          <li><a ui-sref="media-overview.digital-panels-overview" class="rightArrow" ng-click="app.click_history.digital_panels_overview_link = 'true';" class="digital_panels_overview_link" id="digital_panels_overview_arrow"><i class="fa fa-play"></i></a></li>
+        </ul>
+    </div>
