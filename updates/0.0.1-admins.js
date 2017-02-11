@@ -9,7 +9,7 @@
 
 exports.create = {
 	User: [
-		{ 'name.first': 'Admin', 'name.last': 'User', 'email': 'admin@ratings-academy.com', 'password': 'temp', 'isAdmin': true },
+		{ 'name.first': 'Admin', 'name.last': 'User', 'email': 'admin@portfolio-cms.com', 'password': 'temp', 'isAdmin': true },
 	],
 };
 

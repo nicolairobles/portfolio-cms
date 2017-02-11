@@ -35,11 +35,29 @@ var routes = {
 exports = module.exports = function (app) {
 	// Views
 	app.get('/', routes.views.index);
-	app.get('/blog/:category?', routes.views.blog);
-	app.get('/blog/post/:post', routes.views.post);
+	// app.get('/blog/:category?', routes.views.blog);
+	app.get('/portfolio/:post', routes.views.post);
 	app.get('/gallery', routes.views.gallery);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
+
+	// Project routes
+	// what I need is a generic router
+	// app.get("/emotize-project", function(req, res){
+	// 	res.render("projects/emotize")
+	// })
+	// app.get("/chorus-project", function(req, res){
+	// 	res.render("projects/chorus")
+	// })
+	// app.get("/beat-the-machine-project", function(req, res){
+	// 	res.render("projects/beat-the-machine")
+	// })
+	// app.get("/emergency-compliment-project", function(req, res){
+	// 	res.render("projects/emergency-compliment")
+	// })
+	// app.get("/nielsen-word-cloud-project", function(req, res){
+	// 	res.render("projects/nielsen-word-cloud")
+	// })
 
 };

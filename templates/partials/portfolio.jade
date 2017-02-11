@@ -1,0 +1,59 @@
+//- each post in data.posts.results
+//-   .post(data-ks-editable=editable(user, { list: 'Post', id: post.id }))
+//-     h2: a(href='/blog/post/' + post.slug)= post.title
+//-     p.lead.text-muted Posted 
+//-       if post.publishedDate
+//-         | on #{post._.publishedDate.format('MMMM Do, YYYY')} 
+//-       if post.categories && post.categories.length
+//-         | in 
+//-         each cat, i in post.categories
+//-           a(href='/blog/' + cat.key)= cat.name
+//-           if i < post.categories.length - 1
+//-             | , 
+//-           else
+//-             |  
+//-       if post.author
+//-         | by #{post.author.name.first}
+//-     if post.image.exists
+//-       img(src=post._.image.fit(160,160)).img.pull-right
+//-     p!= post.content.brief
+//-     if post.content.extended
+//-       p.read-more: a(href='/blog/post/' + post.slug) Read more...
+
+
+
+
+.content-blocks.portfolio.hidex
+  section.content
+    .block-content
+      h3.block-title Portfolio
+      .row
+        .col-md-12
+          ul#filters
+            //- <li class="active" data-filter="*">All</li>
+            each category in data.categories
+              if category.name == featured
+                | : First item in list!
+              li(data-filter="."+category.name)=category.name
+            //- li.active(data-filter='.featured') Featured
+            //- li(data-filter='.back-end') Back-End
+            //- li(data-filter='.graphic') Front-End + Design
+            //- li(data-filter='.apis') APIs
+            //- li(data-filter='.game') Games
+          #projects
+            //- Generic Project Layout
+            each post in data.posts.results
+              //- create a temp array of categories for post
+              - var postCategoriesArray = []
+              each category in post.categories
+                  - postCategoriesArray.push(category.name)
+              //- end temp array loop
+              .project(class=postCategoriesArray)
+                a.open-project(href='/portfolio/' + post.title)
+                  .project-overlay
+                    .vcenter
+                      .centrize
+                        h4= post.content.pageTitle
+                        p.project-subtitle= post.content.subTitle
+                img(src=post.image.secure_url)
+
