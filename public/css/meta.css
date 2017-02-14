@@ -4117,10 +4117,14 @@ ul.info-list li strong {
 
 .content {
     position: relative;
-    padding: 100px 50px 50px;
+    padding: 80px 100px 70px 85px;
     height: auto;
     overflow: hidden;
 }
+
+/*.content.resume {
+    padding: 65px 50px 50px;
+}*/
 
 .block-content {
     margin: 0 0 100px;
@@ -4135,7 +4139,7 @@ ul.info-list li strong {
     color: #333;
     padding-bottom: 10px;
     border-bottom: 1px dashed #ddd;
-	margin-bottom: 50px;
+	margin-bottom: 25px;
     font-weight: 700;
 }
 

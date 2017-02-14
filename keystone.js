@@ -29,7 +29,21 @@ keystone.init({
 	'session': true,
 	'auth': true,
 	'user model': 'User',
-	'port': 5500
+	'port': 5500,
+	'wysiwyg additional options': {
+        // skin : 'lightgray',
+        verify_html: false
+        // menubar : 'file edit format view insert',
+        // relative_urls: false,
+        // content_css: '/assets/css/styles.min.css',
+        // visualblocks_default_state: true,
+        // external_plugins: {
+        //     'tinyvision':'/assets/plugins/tinyvision/build/plugin.min.js'
+        // },
+        // tinyvision: {
+        //     source: '/api/images'
+        // }
+	}
 });
 
 // Load your project's Models

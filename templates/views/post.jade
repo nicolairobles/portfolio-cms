@@ -5,8 +5,8 @@ block content
 		h2 Invalid Post.
 	else
 		.post
-			if data.post.image.exists
-				.image-wrap: img(src=data.post._.image.fit(750,450)).img-responsive
+			//- if data.post.image.exists
+			//- 	.image-wrap: img(src=data.post._.image.fit(750,450)).img-responsive
 			!= data.post.content.full
 
 include ../partials/footer
