@@ -30,20 +30,10 @@ keystone.init({
 	'auth': true,
 	'user model': 'User',
 	'port': 5500,
-	'wysiwyg additional options': {
-        // skin : 'lightgray',
+  'wysiwyg additional options': {
         verify_html: false
-        // menubar : 'file edit format view insert',
-        // relative_urls: false,
-        // content_css: '/assets/css/styles.min.css',
-        // visualblocks_default_state: true,
-        // external_plugins: {
-        //     'tinyvision':'/assets/plugins/tinyvision/build/plugin.min.js'
-        // },
-        // tinyvision: {
-        //     source: '/api/images'
-        // }
-	}
+  },
+  'wysiwyg cloudinary images': true
 });
 
 // Load your project's Models

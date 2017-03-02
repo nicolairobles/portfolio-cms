@@ -6,30 +6,33 @@
       | Resume
     li.contact.menu-item(style='text-transform: uppercase') Contact
     li#close ×
-section.bg-image
-section.home
-  #wrapper
-    section#lander.container
-      .landerWrapper
-        h2.title Full Stack Engineer + Designer
-        h1
-          span.nicolai Nicolai
-          span.robles Robles
-        h2.portfolio.menu-item(style='text-transform: lowercase;')
-          a.portfolio Portfolio
-        h2.resume.menu-item(style='text-transform: lowercase;')
-          a.resume Resume
-        h2.contact.menu-item(style='text-transform: lowercase;')
-          a.contact Contact
-        // <h2 class="contact menu-item" style="text-transform: lowercase;"><a>Contact</a></h2>
-        style(type='text/css').
-          a{
-          -webkit-transition: all 0.7s ease;
-          -moz-transition: all 0.7s ease;
-          -o-transition: all 0.7s ease;
-          transition: all 0.7s ease;
-          padding-bottom: 7px;
-          }
-          a:hover{
-          border-bottom: 1px solid white;
-          }
+section.bg-image#intro.intro-section(style="background:#000000;")
+  #cover
+    section.home#title
+      #wrapper
+        section#lander.container
+          .landerWrapper
+            h2.title Full Stack Engineer + Designer
+            h1
+              span.nicolai Nicolai
+              span.robles(style="padding-left:20px;") Robles
+            h2.portfolio.menu-item(style='text-transform: lowercase;')
+              a.portfolio(style="pointer-events:visible;") Portfolio
+            h2.resume.menu-item(style='text-transform: lowercase;')
+              a.resume(style="pointer-events:visible;") Resume
+            h2.contact.menu-item(style='text-transform: lowercase;')
+              a.contact(style="pointer-events:visible;") Contact
+            //- <h2 class="contact menu-item" style="text-transform: lowercase;"><a>Contact</a></h2>
+            style(type='text/css').
+              a{
+              -webkit-transition: all 0.7s ease;
+              -moz-transition: all 0.7s ease;
+              -o-transition: all 0.7s ease;
+              transition: all 0.7s ease;
+              padding-bottom: 7px;
+              }
+              a:hover{
+              border-bottom: 1px solid white;
+              }
+  .nextSection
+

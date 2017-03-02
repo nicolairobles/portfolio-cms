@@ -4389,7 +4389,7 @@ ul.info-list li strong {
 
 @media (max-width:800px) and (max-height:600px) {
 	.home {
-		background: url(../images/output.gif) black 30% 30%;
+		/*background: url(../images/output.gif) black 30% 30%;*/
 		overflow-y: scroll;
 	}
 
@@ -4461,7 +4461,7 @@ ul.info-list li strong {
 @media (max-width:768px) {
 
 	.home {
-		background: url(../images/output.gif) black 30% 30%;
+		/*background: url(../images/output.gif) black 30% 30%;*/
 	}
 
 /*	.name-block,
