@@ -30,7 +30,7 @@ keystone.init({
 	'auth': true,
 	'user model': 'User',
 	'port': 5500,
-  'mongo': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://localhost/ratings-academy-dev',
+  'mongo': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://localhost/portfolio-cms',
   'wysiwyg additional options': {
         verify_html: false
   },
