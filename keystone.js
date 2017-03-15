@@ -30,7 +30,7 @@ keystone.init({
 	'auth': true,
 	'user model': 'User',
 	'port': 5500,
-  'mongo': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://localhost/portfolio-cms',
+  'mongo': 'mongodb://localhost/portfolio-cms' || process.env.MONGO_URI || process.env.MONGOLAB_URI,
   'wysiwyg additional options': {
         verify_html: false
   },
@@ -57,7 +57,8 @@ keystone.set('routes', require('./routes'));
 keystone.set('nav', {
 	posts: ['posts', 'post-categories'],
 	galleries: 'galleries',
-	users: 'users',
+  users: 'users',
+	contacts: 'contacts',
 });
 
 // Start Keystone to connect to your database and initialise the web server

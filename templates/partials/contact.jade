@@ -4,18 +4,19 @@
     .block-content
       h3.block-title Contact
       .row
+      each contact in data.contacts
         .col-md-12
           .contact-content
             .contact-details
-              p nicolai.robles@gmail.com
+              p=contact.email
           .contact-content
             .contact-details
-              p  201-245-3735
-          .contact-content
-            .contact-details
-              p
-                a.fa.fa-github(target='_blank', href='http://www.github.com/nicolairobles')  nicolairobles
+              p=contact.phoneNumber
           .contact-content
             .contact-details
               p
-                a.fa.fa-linkedin(target='_blank', href='http://www.linkedin.com/in/nicolairobles')  nicolairobles
+                a.fa.fa-github(target='_blank', href='http://' + contact.gitHub)  nicolairobles
+          .contact-content
+            .contact-details
+              p
+                a.fa.fa-linkedin(target='_blank', href='http://' + contact.linkedIn)  nicolairobles

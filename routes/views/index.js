@@ -15,6 +15,7 @@ exports = module.exports = function (req, res) {
 	locals.data = {
 		posts: [],
 		categories: [],
+		contacts: [],
 	};
 
 		// Load all categories
@@ -83,6 +84,26 @@ exports = module.exports = function (req, res) {
 			next(err);
 		});
 	});
+
+
+	view.on('init', function (next) {
+		console.log("contact info query----")
+
+		keystone.list('Contact').model.find().exec(function (err, results) {
+
+			if (err || !results.length) {
+				return next(err);
+			}
+			console.log("nicolai robles query----")
+			console.log(results)
+
+			locals.data.contacts = results;
+			next();
+
+		});
+	});
+
+
 
 	// Render the view
 	view.render('index');
