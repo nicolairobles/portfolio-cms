@@ -4,7 +4,7 @@
     height: 100%;
     padding-top: 0px;
     text-align: center;
-    background: #fff;
+    /*background: #fff;*/
 }
 
 .icon{
@@ -23,14 +23,14 @@
 /*Home Page Graphic*/
 
 #title {
-  position: absolute;
-  pointer-events: none;
-  opacity: 0;
+  /*position: absolute;*/
+  /*pointer-events: none;*/
+  /*opacity: 0;*/
 }
 
-#title h1{
+/*#title h1{
   font-size: 60px;
 }
 #title p{
   font-size: 18px;
-}
+}*/
