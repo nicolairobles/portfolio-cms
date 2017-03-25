@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>3D Demo</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="../bower_components/requestAnimationFrame/app/requestAnimationFrame.js"></script>
+    <script src="../ticktack.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
+    <script src="http://mrdoob.github.io/three.js/examples/js/shaders/ConvolutionShader.js"></script>
+    <script src="http://mrdoob.github.io/three.js/examples/js/shaders/CopyShader.js"></script>
+    <script src="http://mrdoob.github.io/three.js/examples/js/shaders/VignetteShader.js"></script>
+    <script src="http://mrdoob.github.io/three.js/examples/js/shaders/FilmShader.js"></script>
+    <script src="http://mrdoob.github.io/three.js/examples/js/shaders/FXAAShader.js"></script>
+    <script src="http://mrdoob.github.io/three.js/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="http://mrdoob.github.io/three.js/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="http://mrdoob.github.io/three.js/examples/js/postprocessing/BloomPass.js"></script>
+    <script src="http://mrdoob.github.io/three.js/examples/js/postprocessing/FilmPass.js"></script>
+    <script src="http://mrdoob.github.io/three.js/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="http://mrdoob.github.io/three.js/examples/js/postprocessing/MaskPass.js"></script>
+    <script>
+      "use strict";
+      var container, camera, scene, renderer, composer, renderTarget, fxaa;
+      var geom_seconds, geom_minutes, geom_hours, deco, deco_items, last_minute_progress;
+
+      var mouse_offset = {x: 0, y: 0, dx: 0, dy: 0};
+      var SHADOW_MAP_WIDTH = 1024, SHADOW_MAP_HEIGHT = 1024;
+      var renderTargetParameters = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat, stencilBufer: false };
+
+      init();
+
+      function setThetaLength(target, thetaLength) {
+        target.parameters.thetaLength = thetaLength;
+
+        var innerRadius     = target.parameters.innerRadius,
+        outerRadius     = target.parameters.outerRadius,
+        thetaSegments   = target.parameters.thetaSegments,
+        phiSegments     = target.parameters.phiSegments,
+        thetaLength     = target.parameters.thetaLength,
+        thetaStart      = target.parameters.thetaStart;
+
+        var radius = innerRadius;
+        var radiusStep = ( ( outerRadius - innerRadius ) / phiSegments );
+
+        for ( var i = 0; i < phiSegments + 1; i ++ ) { // concentric circles inside ring
+          for ( var o = 0; o < thetaSegments + 1; o ++ ) { // number of segments per circle
+            var vertex = target.vertices[(i* (thetaSegments + 1)) + o];
+            var segment = thetaStart + o / thetaSegments * thetaLength;
+            vertex.x = radius * Math.cos( segment );
+            vertex.y = radius * Math.sin( segment );
+          }
+          radius += radiusStep;
+        }
+        target.verticesNeedUpdate = true;
+      }
+
+      function init() {
+        last_minute_progress = 0;
+        container = document.createElement( 'div' );
+        document.body.appendChild( container );
+
+        camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+        camera.position.y = 50;
+        camera.position.z = 700;
+
+        scene = new THREE.Scene();
+
+        var object;
+
+        var light = new THREE.SpotLight( 0xffffff, 1, 0, Math.PI / 2, 1 );
+        light.position.set( 0, 200, 1000 );
+        light.target.position.set( 0, 0, 0 );
+
+        light.castShadow = true;
+
+        light.shadowCameraNear = 500;
+        light.shadowCameraFar = 1500;
+        light.shadowCameraFov = 50;
+
+        //light.shadowCameraVisible = true;
+
+        light.shadowBias = 0.0001;
+        light.shadowDarkness = 0.04;
+
+        light.shadowMapWidth = SHADOW_MAP_WIDTH;
+        light.shadowMapHeight = SHADOW_MAP_HEIGHT;
+
+        scene.add( light );
+
+        var material_seconds = new THREE.MeshPhongMaterial({
+          color: 0x990000,
+          shininess: 30,
+          specular: 0x111111,
+          side: THREE.DoubleSide
+        });
+
+        var material_minutes = new THREE.MeshPhongMaterial({
+          color: 0x990000,
+          shininess: 30,
+          specular: 0x111111,
+          side: THREE.DoubleSide
+        });
+
+        var material_hours = new THREE.MeshPhongMaterial({
+          color: 0xaa0000,
+          shininess: 30,
+          specular: 0x111111,
+          side: THREE.DoubleSide
+        });
+
+        var material_deco = new THREE.MeshPhongMaterial({
+          color: 0xffffff,
+          shininess: 30,
+          specular: 0x333333,
+          side: THREE.DoubleSide
+        });
+
+        geom_hours = new THREE.RingGeometry(20, 40, 40, 1, 0, Math.PI * 2);
+        geom_minutes = new THREE.RingGeometry(85, 100, 40, 1, 0, Math.PI * 2);
+        geom_seconds = new THREE.RingGeometry(110, 115, 60, 1, 0, Math.PI * 2);
+
+        object = new THREE.Mesh( geom_seconds, material_seconds );
+        object.rotation.set(0, 0, Math.PI * 0.5);
+        object.scale.set(1, 1, -1);
+        object.castShadow = true;
+        scene.add( object );
+
+        object = new THREE.Mesh( geom_minutes, material_minutes );
+        object.rotation.set(0, 0, Math.PI * 0.5);
+        object.position.set(0,0, -100);
+        object.scale.set(1, 1, -1);
+        object.castShadow = true;
+        scene.add( object );
+
+        object = new THREE.Mesh( geom_hours, material_hours );
+        object.rotation.set(0, 0, Math.PI * 0.5);
+        object.position.set(0,0, 50);
+        object.scale.set(1, 1, -1);
+        object.castShadow = true;
+        scene.add( object );
+
+        // Add small elements.
+        deco_items = [];
+        for (var i = 0; i < 20; i++) {
+          var inner_radius = Math.random() * 120 + 130;
+          var width = Math.random() * 20 + 1;
+          var theta = Math.PI * Math.random() + 0.05;
+          // Use theta to determine the number of poligons
+          // on the length (but max 40 polygons).
+          var numpolygons = Math.min(40, 2 + Math.round(theta * 10));
+          var geom = new THREE.RingGeometry(inner_radius, inner_radius + width, numpolygons, 1, 0, theta);
+          var item = new THREE.Mesh(geom, material_deco);
+          item.userData.rotation = Math.PI * 2 * Math.random();
+          item.userData.weight = Math.random() * 0.1 + 0.05;
+          item.rotation.set(0, 0, Math.PI * 2 * Math.random());
+          item.position.set(0,0, 50 + Math.random() * 300);
+          item.castShadow = true;
+          scene.add( item );
+          deco_items.push(item);
+        }
+
+        var geometry = new THREE.PlaneGeometry( 3400, 1600, 2 );
+        var material = new THREE.MeshBasicMaterial( {color: 0xdddddd, side: THREE.DoubleSide} );
+        var ground = new THREE.Mesh( geometry, material );
+        ground.position.set(0, 0, -150);
+        ground.receiveShadow = true;
+        scene.add( ground );
+
+        renderer = new THREE.WebGLRenderer( { antialias: true } );
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        //renderer.setClearColor( 0x2E2625, 1);
+        renderer.autoClear = false;
+        renderer.shadowMapEnabled = true;
+        renderer.shadowMapType = THREE.PCFSoftShadowMap;
+        container.appendChild( renderer.domElement );
+
+        var scaled_size = {
+            width: window.innerWidth * window.devicePixelRatio,
+          height: window.innerHeight * window.devicePixelRatio
+        };
+          renderTarget = new THREE.WebGLRenderTarget(scaled_size.width, scaled_size.height, renderTargetParameters)
+
+        var effectBloom = new THREE.BloomPass( 0.3 );
+        var effectFilm = new THREE.FilmPass( 0.02, 0, 648, false );
+        var vignettePass = new THREE.ShaderPass(THREE.VignetteShader);
+        vignettePass.uniforms['darkness'].value = 0.6;
+        fxaa = new THREE.ShaderPass( THREE.FXAAShader );
+        fxaa.uniforms[ 'resolution' ].value.set(1 / scaled_size.width, 1 / scaled_size.height);
+
+        effectFilm.renderToScreen = true;
+
+        composer = new THREE.EffectComposer(renderer, renderTarget);
+        composer.setSize(scaled_size.width, scaled_size.height);
+        composer.addPass(new THREE.RenderPass(scene, camera));
+        composer.addPass(effectBloom);
+        composer.addPass(fxaa);
+        composer.addPass(vignettePass);
+        composer.addPass(effectFilm);
+
+        window.addEventListener( 'resize', onWindowResize, false );
+      }
+
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        var scaled_size = {
+            width: window.innerWidth * window.devicePixelRatio,
+          height: window.innerHeight * window.devicePixelRatio
+        };
+
+        fxaa.uniforms[ 'resolution' ].value.set(1 / scaled_size.width, 1 / scaled_size.height);
+          renderTarget = new THREE.WebGLRenderTarget(scaled_size.width, scaled_size.height, renderTargetParameters)
+        composer.reset(renderTarget);
+        renderer.setSize( window.innerWidth, window.innerHeight );
+      }
+
+      ticktack.on('tick', function(o){
+        setThetaLength(geom_seconds, o.getMinute().progress * Math.PI * 2 * -1);
+        setThetaLength(geom_minutes, o.getHour().progress * Math.PI * 2 * -1);
+
+        // display 2 * 12h, day.progress is calculted on 24h.
+        var day_progress = (o.getDay().progress * 2) % 1;
+        setThetaLength(geom_hours, day_progress * Math.PI * 2 * -1);
+
+
+        // Move deco items to their target rotation.
+        for (var i = deco_items.length - 1; i >= 0; i--) {
+          var item = deco_items[i];
+          // Change deco position when starting a new minute.
+          if (o.minute.progress < last_minute_progress) {
+            // Move target rotation.
+            item.userData.rotation += Math.random() * 2 - 1;
+          }
+
+          // weight = 0 > 0.15
+          item.userData.rotation += (item.userData.weight - 0.075) * 0.004;
+
+          var rotation = item.rotation.z + (item.userData.rotation - item.rotation.z) * item.userData.weight;
+          item.rotation.set(0, 0, rotation);
+        }
+
+        last_minute_progress = o.getMinute().progress;
+        render();
+      });
+
+      document.onmousemove = function(event) {
+        mouse_offset.x = (event.clientX / window.innerWidth) - 0.5;
+        mouse_offset.y = ((event.clientY / window.innerHeight) - 0.5) * -1;
+      }
+
+      document.onclick = function(event) {
+        last_minute_progress = 9999;
+      }
+
+      function render() {
+        var timer = Date.now() * 0.0001;
+
+        // Add some damping to mouse movement.
+        mouse_offset.dx += (mouse_offset.x - mouse_offset.dx) * 0.05;
+        mouse_offset.dy += (mouse_offset.y - mouse_offset.dy) * 0.05;
+        camera.position.x = Math.cos( timer ) * 50 + mouse_offset.dx * 200;
+        camera.position.y = mouse_offset.dy * 200;
+        camera.lookAt( scene.position );
+
+        composer.render(timer);
+      }
+    </script>
+  </body>
+</html>
