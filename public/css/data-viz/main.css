@@ -61,3 +61,12 @@
   left: 100%;
 }
 
+.large-text-shadow{
+ text-shadow: -15px 16px 15px #000000;
+
+}
+
+.small-text-shadow{
+ text-shadow: -5px 6px 5px #000000;
+
+}
