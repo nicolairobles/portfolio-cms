@@ -1,0 +1,32 @@
+.nicolai{
+	text-shadow:-15px 16px 15px #000000 !important;
+}
+.robles{
+	text-shadow:-15px 16px 15px #000000 !important;
+	padding-left:20px;
+}
+
+
+
+/* Large Desktop, larger than 1200px */
+@media (min-width: 1200px) {
+
+}
+
+/* Tablet Widths, btw 768px and 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+/* Mobile Widths, less than 767 */
+@media (max-width: 767px) {
+	.robles{
+		padding-left:0px;
+	}
+	.inline-menu li{
+		padding: 0 10px;
+	}
+	.content-blocks {
+    height: 130%;
+	}
+}
