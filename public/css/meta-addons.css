@@ -26,7 +26,8 @@
 	.inline-menu li{
 		padding: 0 10px;
 	}
-	#post-modal, #project-modal, .content-blocks {
+	/*#post-modal, #project-modal, */
+	.content-blocks {
     height: 130%;
 	}
 }
