@@ -19,5 +19,8 @@ script.
 script.
   $("#resume-download-link").click(function(){
     console.log("resume button clicked")
-    ga('send', 'event', 'button_click', 'download', 'resume');
+    gtag('event', 'download', {
+      'event_category': "button_clicked",
+      'event_label': "resume"
+    });
   });
