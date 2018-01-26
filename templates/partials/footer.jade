@@ -13,4 +13,11 @@ script.
  window.dataLayer = window.dataLayer || [];
  function gtag(){dataLayer.push(arguments);}
  gtag('js', new Date());
- gtag('config', 'UA-112947689-1');   
+ gtag('config', 'UA-112947689-1'); 
+
+//- Event Tracking
+script.
+  $("#resume-download-link").click(function(){
+    console.log("resume button clicked")
+    ga('send', 'event', 'button_click', 'download', 'resume');
+  });
