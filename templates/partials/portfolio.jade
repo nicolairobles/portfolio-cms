@@ -34,7 +34,9 @@
             each category in data.categories
               if category.name == featured
                 | : First item in list!
-              li(data-filter="."+category.name)=category.name
+                li(data-filter="."+category.name class='active')=category.name
+              else
+                li(data-filter="."+category.name)=category.name
             //- li.active(data-filter='.featured') Featured
             //- li(data-filter='.back-end') Back-End
             //- li(data-filter='.graphic') Front-End + Design
